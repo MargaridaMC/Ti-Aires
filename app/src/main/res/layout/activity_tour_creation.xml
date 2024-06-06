@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.TourCreationActivity"
+    tools:showIn="@layout/activity_tour_creation">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@id/action_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="@dimen/small_padding">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:theme="@style/CustomActionBar"/>
+
+                <TextView
+                    android:id="@+id/tour_name_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="@string/tour_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/main_text_size"
+                    app:layout_constraintStart_toEndOf="@id/toolbar"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/tour_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:textAppearance="@style/AppBarTextStyle"
+                    android:textColor="@color/colorLight"
+                    android:backgroundTint="@color/colorLight"
+                    android:singleLine="true"
+                    android:maxLength="20"
+                    android:inputType="textCapWords"
+                    app:layout_constraintStart_toEndOf="@id/toolbar"
+                    app:layout_constraintTop_toBottomOf="@id/tour_name_view"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/geo_cache_codes_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:text="@string/geo_cache_codes"
+        android:textAppearance="@style/MainText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action_bar" />
+
+    <EditText
+        android:id="@+id/geo_cache_codes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin"
+        android:gravity="top|start"
+        android:background="@drawable/text_box_with_border"
+        android:theme="@style/EditText"
+        android:inputType="textCapSentences|textMultiLine|textFilter"
+        app:layout_constraintBottom_toTopOf="@id/create_tour_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/geo_cache_codes_view" />
+
+    <Button
+        android:id="@+id/create_tour_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin"
+        android:text="@string/create_tour"
+        android:textAppearance="@style/MainText"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:onClick="createTour"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+       <include layout="@layout/getting_tour_progress_bar"
+           android:id="@+id/progress_layout"
+           android:layout_width="wrap_content"
+           android:visibility="invisible"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/geo_cache_codes"
+            app:layout_constraintBottom_toBottomOf="@+id/geo_cache_codes"
+            app:layout_constraintStart_toStartOf="@+id/geo_cache_codes"
+            app:layout_constraintEnd_toEndOf="@+id/geo_cache_codes"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

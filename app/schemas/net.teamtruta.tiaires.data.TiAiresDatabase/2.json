@@ -1,0 +1,388 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "e4ff419983499f60cc1107d56027d011",
+    "entities": [
+      {
+        "tableName": "cacheDetail",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`code` TEXT NOT NULL, `name` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `size` TEXT NOT NULL, `difficulty` REAL NOT NULL, `terrain` REAL NOT NULL, `type` TEXT NOT NULL, `foundIt` TEXT NOT NULL, `hint` TEXT NOT NULL, `favourites` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "code",
+            "columnName": "code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "size",
+            "columnName": "size",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "difficulty",
+            "columnName": "difficulty",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "terrain",
+            "columnName": "terrain",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "previousVisitOutcome",
+            "columnName": "foundIt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hint",
+            "columnName": "hint",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "favourites",
+            "columnName": "favourites",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "_id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "cache",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`cacheDetailID_FK` INTEGER NOT NULL, `tourID_FK` INTEGER NOT NULL, `notes` TEXT NOT NULL, `visit` TEXT NOT NULL, `needsMaintenance` INTEGER NOT NULL, `visitDatetime` TEXT, `foundTrackable` TEXT, `droppedTrackable` TEXT, `favouritePoint` INTEGER NOT NULL, `orderBy` INTEGER NOT NULL, `image` TEXT, `draftUploaded` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`cacheDetailID_FK`) REFERENCES `cacheDetail`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`tourID_FK`) REFERENCES `tour`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "geoCacheDetailIDFK",
+            "columnName": "cacheDetailID_FK",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tourIDFK",
+            "columnName": "tourID_FK",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentVisitOutcome",
+            "columnName": "visit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "needsMaintenance",
+            "columnName": "needsMaintenance",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentVisitDatetime",
+            "columnName": "visitDatetime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundTrackable",
+            "columnName": "foundTrackable",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "droppedTrackable",
+            "columnName": "droppedTrackable",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "favouritePoint",
+            "columnName": "favouritePoint",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderIdx",
+            "columnName": "orderBy",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pathToImage",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "draftUploaded",
+            "columnName": "draftUploaded",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "_id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_cache_cacheDetailID_FK",
+            "unique": false,
+            "columnNames": [
+              "cacheDetailID_FK"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_cache_cacheDetailID_FK` ON `${TABLE_NAME}` (`cacheDetailID_FK`)"
+          },
+          {
+            "name": "index_cache_tourID_FK",
+            "unique": false,
+            "columnNames": [
+              "tourID_FK"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_cache_tourID_FK` ON `${TABLE_NAME}` (`tourID_FK`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "cacheDetail",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "cacheDetailID_FK"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "tour",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "tourID_FK"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "tour",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, `isCurrentTour` INTEGER NOT NULL, `startingPointLatitude` REAL, `startingPointLongitude` REAL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isCurrentTour",
+            "columnName": "isCurrentTour",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startingPointLatitude",
+            "columnName": "startingPointLatitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "startingPointLongitude",
+            "columnName": "startingPointLongitude",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT NOT NULL, `date` TEXT NOT NULL, `cacheDetailID_FK` INTEGER NOT NULL, FOREIGN KEY(`cacheDetailID_FK`) REFERENCES `cacheDetail`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "logType",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "logDate",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cacheDetailIDFK",
+            "columnName": "cacheDetailID_FK",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_log_cacheDetailID_FK",
+            "unique": false,
+            "columnNames": [
+              "cacheDetailID_FK"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_log_cacheDetailID_FK` ON `${TABLE_NAME}` (`cacheDetailID_FK`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "cacheDetail",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "cacheDetailID_FK"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "attribute",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT NOT NULL, `cacheDetailID_FK` INTEGER NOT NULL, FOREIGN KEY(`cacheDetailID_FK`) REFERENCES `cacheDetail`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attributeType",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cacheDetailIDFK",
+            "columnName": "cacheDetailID_FK",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_attribute_cacheDetailID_FK",
+            "unique": false,
+            "columnNames": [
+              "cacheDetailID_FK"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_attribute_cacheDetailID_FK` ON `${TABLE_NAME}` (`cacheDetailID_FK`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "cacheDetail",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "cacheDetailID_FK"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e4ff419983499f60cc1107d56027d011')"
+    ]
+  }
+}
